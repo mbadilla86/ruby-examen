@@ -1,11 +1,22 @@
 require "uri"
 require "net/http"
-url = URI("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=#{sol}&api_key=d4v6gZycznoxIBp3HGJJlyRPYFvht48pSVTyXMjM")
+require "json"
 
-https = Net::HTTP.new(url.host, url.port)
-https.use_ssl = true
+def request(url,token = nil)
+    sol = ARGV[0]
+    url = URI("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=#{sol}1000&api_key=d4v6gZycznoxIBp3HGJJlyRPYFvht48pSVTyXMjM")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    response = http.request(request)
+    data_hash = JSON.parse(response.read_body)
+end
 
-request = Net::HTTP::Get.new(url)
-
-response = https.request(request)
-puts response.read_body
+#index.html
+def buid_wed_page(info_hash)
+    File.open('index.html', 'w') do |file|      
+        file.puts "<img src='#{info_hash["photos"]}"
+    end
+end
+nasa_array = request("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&","d4v6gZycznoxIBp3HGJJlyRPYFvht48pSVTyXMjM")
+puts buid_wed_page(nasa_array)
