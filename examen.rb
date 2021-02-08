@@ -9,7 +9,7 @@ def request(url,token = nil)
     http.use_ssl = true
     request = Net::HTTP::Get.new(url)
     response = http.request(request)
-    data_hash = JSON.parse(response.read_body)
+    return JSON.parse(response.read_body)
 end
 
 #index.html
