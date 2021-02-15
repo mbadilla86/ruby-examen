@@ -16,14 +16,18 @@ def buid_wed_page(info_hash)
     File.open('index.html', 'w') do |file|      
         file.puts "<html>"
         file.puts "<head>"
+        file.puts "<meta charset='UTF-8'>"
+        file.puts"<meta name='Mauricio Badilla'>"
+        file.puts"<meta name='viemport' content='width=device-width, initial-scale=1.0'>"
         file.puts "</head>"
+        file.puts "<title>'Fotos de la Nasa'</title>"
         file.puts "<body>"
+        file.puts "<h1>Mars Rover Photos</h1>"
         file.puts "<ul>"
         info_hash["photos"].each do |photo_hash|
              file.puts "<li><img src='#{photo_hash["img_src"]} 'width = '110'></li>"
 
         end
-        file.puts "<li> 'Largo': #{info_hash["photos"].length}</li>" 
         file.puts "</ul>"
         file.puts "</body>"
         file.puts "</html>"
